@@ -1,0 +1,78 @@
+<div id="CookController" class="CookController" ng-controller="CookController">
+
+	<div class="form">
+
+		<h1>I Make Platters</h1>
+		<h2>Cook Menus</h2>
+		<h3>List of Cook Menus</h3>
+
+		<div id="PersonInfo">
+			Welcome {{Person.firstname}}.<br />
+			Click + to add a new menu.
+		</div>
+
+		<form ng-submit="addMenuTitle(menu)">
+			
+			<div class="field-wrap">
+				<input 
+					id="menuTitle" 
+					name="menuTitle" 
+					type="text" 
+					required 
+					style="float:left; width: 70%;" 
+					placeholder="Add New Menu" 
+					ng-model="menu.menuTitle" 
+				/>
+				<input id="dateCreated" name="dateCreated" type="hidden" ng-model="menu.dateCreated" />
+				<input id="menuStatus" name="menuStatus" type="hidden" ng-model="menu.menuStatus" />
+				<input id="personId" name="personId" type="hidden" ng-model="Person.personId" />
+			</div>
+
+			<button id="add" type="submit" class="btn btn-primary">+</button>
+		</form>
+
+		<br />
+		<p>List of Menus</p>
+
+ 		<ul class="menus">
+			<li ng-repeat="menu in Menus">
+				<div id="menuTitle"> <!-- Dialog Box Container -->
+					<p>menu.title: {{ menu.title }}<br />menu.id: {{ menu.menuId }}
+						<button class="btn btn-primary" ng-click="addFoodToPlatter = !addFoodToPlatter">Add</button>
+					</p>
+
+                    <div id="platters">
+                        <ul>
+                            <li ng-repeat="platter in Platters">
+                                <!-- Individual platter-->
+                                <div id="platterName">
+                                    <p>{{ platter.name }}: {{ platter.price }}</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+				</div>
+                
+			</li>
+		</ul>
+
+		<br />
+
+		<ul>
+			<li class="active">Person.personId: {{Person.personId}}</li>
+			<li>Person.firstname: {{Person.firstname}}</li>
+			<li>Person.lastname: {{Person.lastname}}</li>
+			<li>Person.emailAddress: {{Person.emailaddress}}</li>
+			<li>Person.type: {{Person.accountType}}</li>
+			<li>Person.menus: {{Person.menus}}</li>
+		</ul>
+
+		<br />
+
+		
+
+
+	</div><!-- form -->
+
+</div><!-- IndexController -->

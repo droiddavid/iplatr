@@ -1,0 +1,62 @@
+<div id="RegisterController" ng-controller="RegisterController">
+	<div id="registerView">
+		<h2>Registration</h2>
+
+		<form name='registrtionform' method="POST">
+
+			<fieldset>
+
+				<table border="0" cellpadding="5" cellspacing="0" width="600">
+					
+					<tr>
+						<td colspan="2">
+							<label for="pid" text="Person ID" />
+							<!--<input id="pid" name="pid" type="text" ng-model="registration.id" placeholder="id" />-->
+						</td>
+					</tr>
+
+					<tr>
+						<td><label id="lblFirstName" for="firstName">First Name</label></td>
+						<td><input id="firstName" name="firstName" type="text" ng-model="registration.firstname" placeholder="First Name" /></td>
+					</tr>
+
+					<tr>
+						<td><label id="lblLastName" for="lastName">Last Name</label></td>
+						<td><input id="lastName" name="lastName" type="text" ng-model="registration.lastname" placeholder="Last Name" /></td>
+					</tr>
+
+					<tr>
+						<td><label id="lblEmailAddress" for="EmailAddress">Email Address</label></td>
+						<td><input id="emailAddress" name="emailAddress" type="email" ng-model="registration.emailAddress" placeholder="Email Address" /></td>
+					</tr>
+
+					<tr>
+						<td><label id="lblType" for="type">Type</label></td>
+						<td>
+							<select id="type" name="type" type="text" ng-model="registration.type" placeholder="Type">
+								<option value="Cook">Cook</option>
+								<option value="Foodie">Foodie</option>
+							</select>
+						</td>
+					</tr>
+
+					<tr>
+						<td><label id="lblPassword" for="password">Password</label></td>
+						<td><input id="password" name="password" type="password" ng-model="registration.password" placeholder="Password" /></td>
+					</tr>
+				</table>
+				
+				<br />
+
+				<input type="submit" name="send" ng-click="register(registration)" value="Register" />
+				<button ng-click="goBack()">Go Back</button>
+
+				<span>$scope.registration = {{registration}}.</span>
+
+			</fieldset>
+
+		</form>
+
+	</div>
+
+</div>

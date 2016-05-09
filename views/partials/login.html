@@ -1,0 +1,33 @@
+<div id="LoginController" ng-controller="LoginController">
+	<div id="loginView">
+
+
+
+		<span>{{ user.data[0].firstname }} {{ user.data[0].lastname  }}, You have logged in.</span>
+
+
+	
+
+
+
+		<table>
+			<tr ng-repeat="x in scope.thedata">
+				<td>{{ x.pid }}</td>
+				<td>{{ x.firstname }}</td>
+			</tr>
+		</table>
+
+
+
+
+
+		<form>
+			<button ng-click="goBack()">Go Back</button>
+		</form>
+
+
+
+
+
+	</div>
+</div>
