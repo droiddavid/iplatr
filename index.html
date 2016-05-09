@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" ng-app="imorsel">
+	<head>
+		<title>iMorsel</title>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <base href="/imorsel/">
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+
+		<script src='javascripts/libs/angular/angular.js'></script>
+		<script src='javascripts/libs/angular/angular-resource.js'></script>
+		<script src='javascripts/libs/angular/angular-route.js'></script>
+		<script src='javascripts/libs/angular/angular-ui-route.js'></script>
+		<script src='javascripts/libs/jquery/jquery-2.2.1.min.js'></script>
+		<!--<script src='/javascripts/libs/bootstrap/ui-bootstrap-tpls-0.12.1.min.js'></script>-->
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js'></script>
+		
+
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.min.css">
+
+
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
+		<script src='javascripts/app.js'></script>
+		
+		<!--
+			<script src='javascripts/directives.js'></script>
+			<script src='javascripts/controllers.js'></script>
+			<script src='javascripts/services.js'></script>
+			<script src='javascripts/filters.js'></script>
+		-->
+
+		<link rel='stylesheet' href='stylesheets/master.css'>
+
+	</head>
+	
+	<body ng-controller='IndexController'>
+		<div id="mainview">
+			iMorsel index page.
+			<pre>
+				<div ng-view></div>			
+			</pre>
+		</div>
+	</body>
+</html>
