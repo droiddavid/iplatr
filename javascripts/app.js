@@ -1,9 +1,9 @@
 /*global angular, $ */
 /*jslint plusplus: true */
 
-var ifas = angular.module('ifas', ['ngRoute']);
+var iplatr = angular.module('iplatr', ['ngRoute']);
 
-ifas.config([
+iplatr.config([
     '$routeProvider',
     '$locationProvider',
     function ($routeProvider, $locationProvider) {
@@ -40,7 +40,7 @@ ifas.config([
 
 
 
-ifas.controller('CookController', ['$log', '$http', '$scope', 'PersonFactory', function ($log, $http, $scope, PersonFactory) {
+iplatr.controller('CookController', ['$log', '$http', '$scope', 'PersonFactory', function ($log, $http, $scope, PersonFactory) {
     'use strict';
     
     $scope.Person = PersonFactory.Person;
@@ -111,7 +111,7 @@ ifas.controller('CookController', ['$log', '$http', '$scope', 'PersonFactory', f
 
 
 
-ifas.controller('IndexController', ['$log', '$http', '$scope', '$location', 'PersonFactory', function ($log, $http, $scope, $location, PersonFactory) {
+iplatr.controller('IndexController', ['$log', '$http', '$scope', '$location', 'PersonFactory', function ($log, $http, $scope, $location, PersonFactory) {
     'use strict';
     
     //handle css classes for setup and login screen
@@ -203,7 +203,7 @@ ifas.controller('IndexController', ['$log', '$http', '$scope', '$location', 'Per
 
 
 
-ifas
+iplatr
     .factory(
         'PersonFactory',
         [
