@@ -1,16 +1,9 @@
-<div id="CookController" class="CookController" ng-controller="CookController">
+<div id="CookController" class="CookController">
 
-	<div class="form">
+	<div ui-view=".header"></div>
 
-		<h1>I Make Platters</h1>
-		<h2>Cook Menus</h2>
-		<h3>List of Cook Menus</h3>
 
-		<div id="PersonInfo">
-			Welcome {{Person.firstname}}.<br />
-			Click + to add a new menu.
-		</div>
-
+	<div id="CookAddMenu" class="form">
 		<form ng-submit="addMenuTitle(menu)">
 			
 			<div class="field-wrap">
@@ -30,8 +23,12 @@
 
 			<button id="add" type="submit" class="btn btn-primary">+</button>
 		</form>
+	</div>
 
-		<br />
+
+
+
+	<div class="form">
 		<p>List of Menus</p>
 
  		<ul class="menus">

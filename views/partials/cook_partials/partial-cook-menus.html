@@ -1,0 +1,29 @@
+<div id="CookAddMenu" class="form" ng-controller="CookPartialMenusController">
+
+	<form name="addMenuTitle" ng-submit="addNewMenuTitle(menu)">
+
+		<div id="addMenuTextBox">
+			<input 
+				id="menuTitle" 
+				name="menuTitle" 
+				type="text" 
+				required 
+				style="float:left; width: 70%;" 
+				placeholder="Add New Menu" 
+				ng-model="menu.menuTitle" 
+			/>
+			<input id="dateCreated" name="dateCreated" type="hidden" ng-model="menu.dateCreated" />
+			<input id="menuStatus" name="menuStatus" type="hidden" ng-model="menu.menuStatus" />
+			<input id="personId" name="personId" type="hidden" ng-model="Person.personId" />
+
+			<button id="add" name="add" type="submit" class="btn btn-primary">+</button>
+		</div>
+
+	</form>
+
+	<div>
+		{{ status }}<br />
+		{{ message }}
+	</div>
+
+</div>
