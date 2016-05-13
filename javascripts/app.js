@@ -26,6 +26,8 @@ iplatr.config([
 				abstract: true
 			})
 
+
+
 			//INDEX STATE ==========================================================
 			.state('/', {
 				url: '/',
@@ -41,9 +43,6 @@ iplatr.config([
 			})
 
 
-
-
-			
 
 			//COOK STATE ==========================================================
 			.state('cook', {
@@ -62,50 +61,9 @@ iplatr.config([
 						templateUrl: 'views/partials/cook_partials/partial-cook-person.html',
 						controller: 'CookPartialPersonController'
 					},
-					'partial-cook-menus@cook': {
-						templateUrl: 'views/partials/cook_partials/partial-cook-menus.html',
-						controller: 'CookPartialMenusController'
-					}
-				}
-			})
-
-			//HOME STATES AND NESTED VIEWS ========================================
-			.state('home', {
-				url: '/home',
-				templateUrl: 'views/partials/partial-home.html'
-			})
-
-			//nested list with custom controller
-			.state('home.list', {
-				url: '/list',
-				templateUrl: 'views/partials/partial-home-list.html',
-				css: 'stylesheets/master.css',
-				controller: function ($scope) {
-					$scope.dogs = ['George', 'Leo', 'Spike', 'Hector'];
-				} //home.list
-			})
-
-			//nested list with just some random string data
-			.state('home.paragraph', {
-				url: '/paragraph',
-				//templateUrl: 'views/partials/partial-home-paragraph.html'
-				template: 'I could sure use a drink right now.'
-			})
-
-			//about states
-			.state('about', {
-				url: '/about',
-				views: {
-					// the main template will be placed here (relatively names)
-					'' : { templateUrl: 'views/partials/partial-about.html'},
-
-					// the child views will be defined here (absolutely named)
-					'columnOne@about': { template: 'Look I am a column!' },
-
-					// for column two, we'll define a separate controller
-					'columnTwo@about': {
-						templateUrl: 'views/partials/partial-table.html',
-						controller: 'scotchController'
+					'partial-cook-menus-add@cook': {
+						templateUrl: 'views/partials/cook_partials/partial-cook-menus-add.html',
+						controller: 'CookPartialMenusAddController'
 					}
 				}
 			});
@@ -116,7 +74,7 @@ iplatr.config([
 
 
 
-
+//Cook Partial Header
 iplatr.controller(
 	'CookPartialHeaderController',
 	[
@@ -127,6 +85,7 @@ iplatr.controller(
 		}
 	]
 );
+//Cook Partial Person
 iplatr.controller(
 	'CookPartialPersonController',
 	[
@@ -137,8 +96,9 @@ iplatr.controller(
 		}
 	]
 );
+//Cook Partial Menus Add
 iplatr.controller(
-	'CookPartialMenusController',
+	'CookPartialMenusAddController',
 	[
 		'$log', '$http', '$scope', 'PersonFactory', 'MenusFactory',
 		function ($log, $http, $scope, PersonFactory, MenusFactory) {
@@ -170,6 +130,7 @@ iplatr.controller(
 		} //end function CookPartialMenusController
 	]
 );
+//Cook Partial Platter
 iplatr.controller(
 	'CookPartialPlatterController',
 	[
@@ -180,6 +141,7 @@ iplatr.controller(
 		}
 	]
 );
+//Cook Partial PlatterItems
 iplatr.controller(
 	'CookPartialPlatterItemsController',
 	[
@@ -190,6 +152,7 @@ iplatr.controller(
 		}
 	]
 );
+//Cook Partial Footer
 iplatr.controller(
 	'CookPartialFooterController',
 	[
@@ -206,26 +169,7 @@ iplatr.controller(
 
 
 
-iplatr.controller('scotchController', function ($scope) {
-	'use strict';
 
-	$scope.message = 'test';
-
-	$scope.scotches = [
-		{
-			name: 'Macallan 12',
-			price: 50
-		},
-		{
-			name: 'Chivas Regal Royal Salute',
-			price: 10000
-		},
-		{
-			name: 'Glenfiddich 1937',
-			price: 20000
-		}
-	];
-});
 iplatr.controller('CookController', ['$log', '$http', '$scope', 'PersonFactory', function ($log, $http, $scope, PersonFactory) {
 	'use strict';
 	
@@ -390,14 +334,15 @@ iplatr
 			function ($http, $log) {
 				'use strict';
 
-				var urlMenuBase = 'http://localhost/iplatr/database/addMenuTitle.php',
+				var urlMenuBase = 'http://localhost/iplatr/database/',
+					addMenuTitle = 'addMenuTitle.php',
 					Menus = {
 						MENU_ACTIVE : 1,
 						MENU_INACTIVE : 0
 					};
 
 				Menus.addMenuTitle = function (menu) {
-					return $http.post(urlMenuBase, menu);
+					return $http.post(urlMenuBase+addMenuTitle, menu);
 				};
 
 				return Menus;
