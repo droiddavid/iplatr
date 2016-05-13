@@ -1,0 +1,12 @@
+<div class="form" ng-controller="CookPartialMenusListController">
+	<p>List of Menus</p>
+
+	<ul class="menus">
+		<li ng-repeat="menu in Menus">
+			<p>{{ menu.menuId }} -- <a sref="{{ menu.menuId }}">{{ menu.title }}</a></p>
+		</li>
+	</ul>
+
+	<br />
+
+</div><!-- form -->

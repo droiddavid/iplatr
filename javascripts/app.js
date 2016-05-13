@@ -64,6 +64,10 @@ iplatr.config([
 					'partial-cook-menus-add@cook': {
 						templateUrl: 'views/partials/cook_partials/partial-cook-menus-add.html',
 						controller: 'CookPartialMenusAddController'
+					},
+					'partial-cook-menus-list@cook': {
+						templateUrl: 'views/partials/cook_partials/partial-cook-menus-list.html',
+						controller: 'CookPartialMenusListController'
 					}
 				}
 			});
@@ -128,6 +132,35 @@ iplatr.controller(
 			}; //addMenuTitle
 
 		} //end function CookPartialMenusController
+	]
+);
+iplatr.controller(
+	'CookPartialMenusListController',
+	[
+		'$log', '$http', '$scope', 'PersonFactory', 'MenusFactory',
+		function ($log, $http, $scope, PersonFactory, MenusFactory) {
+			'use strict';
+
+			$scope.Menus = [];
+
+			$scope.getMenuTitles = function (personId) {
+				MenusFactory.getMenuTitles({ personId: personId})
+					.success(
+						function (response) {
+							$scope.Menus = response.data;
+							$scope.status = response.status;
+							$scope.message = response.message;
+						}
+					)
+					.error(
+						function (err) {
+							$log.log('Error: ' + err.message);
+						}
+					);
+			}; //$scope.getMenuTitles
+
+			$scope.getMenuTitles(PersonFactory.Person.personId);
+		} //end function CookPartialMenusListController
 	]
 );
 //Cook Partial Platter
@@ -336,13 +369,19 @@ iplatr
 
 				var urlMenuBase = 'http://localhost/iplatr/database/',
 					addMenuTitle = 'addMenuTitle.php',
+					getMenuTitles = 'getMenus.php',
 					Menus = {
 						MENU_ACTIVE : 1,
-						MENU_INACTIVE : 0
+						MENU_INACTIVE : 0,
+						Menus : []
 					};
 
 				Menus.addMenuTitle = function (menu) {
-					return $http.post(urlMenuBase+addMenuTitle, menu);
+					return $http.post(urlMenuBase + addMenuTitle, menu);
+				};
+
+				Menus.getMenuTitles = function (personId) {
+					return $http.post(urlMenuBase + getMenuTitles, personId);
 				};
 
 				return Menus;
