@@ -6,59 +6,97 @@
 		<title>iPlatr</title>
 
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-        
+		<meta name="viewport" content="width=device-width, initial-scale=1">        
         <base href="/iPlatr/">
 
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 
+
+
+		<!-- LOCAL ANGULAR FILES -->
 		<link rel='stylesheet' href='stylesheets/master.css'>
-		<script src='javascripts/libs/angular/angular.js'></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
 		<script src='javascripts/libs/angular/angular-resource.js'></script>
 		<script src='javascripts/libs/angular/angular-route.js'></script>
 		<script src='javascripts/libs/angular/angular-ui-router.min.js'></script>
-		<script src='https://cdnjs.cloudflare.com/ajax/libs/angular-css/1.0.8/angular-css.min.js'></script>
-		<script src='javascripts/libs/jquery/jquery-2.2.1.min.js'></script>
-		<!--<script src='/javascripts/libs/bootstrap/ui-bootstrap-tpls-0.12.1.min.js'></script>-->
-		<script src='https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js'></script>
-		
 
 
+
+
+
+		<!-- JQUERY -->
+		<script src='https://code.jquery.com/jquery-2.2.3.min.js'></script>
+
+
+
+
+
+		<!-- BOOTSTRAP STYLESHEETS and ANGULAR-CSS -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/angular-css/1.0.8/angular-css.min.js'></script>
 
 
 
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
 
+
+		<!-- BOOTSTRAP JAVASCRIPT STYLESHEETS -->
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+
+
+
+
+		<!-- angular-animate.js, angular-touch.min.js and ui-bootstrap-tpls.min.js added on 05.13.16 to 
+				support bootstrap.ui's accordion component-->
+		<!-- ** WARNING ** The following CDN is NOT well-known-good.  Replace when able. DAD 05.13.16 **WARNING ** -->
+		<script src='http://cdn.jsdelivr.net/angularjs/1.3.5/angular-touch.min.js'></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.2/ui-bootstrap-tpls.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.js"></script>
+
+
+
+
+
+		<!-- ANGULARJS APPLICATION FILES -->
 		<script src='javascripts/app.js'></script>		
 		<script src='javascripts/directives.js'></script>
 		<script src='javascripts/controllers.js'></script>
 		<script src='javascripts/services.js'></script>
 		<script src='javascripts/filters.js'></script>
 
+
+
+
+
 	</head>
-	
+
+
+
+
+
 	<body ng-controller='IndexController' style="background-color: #c1bdba">
 
 		<!-- NAVIGATION -->
 		<nav class="navbar navbar-inverse" role="navigation">
 			<div class="navbar-header">
-				<a class="navbar-brand" ui-sref="#">AngularUI Router</a>
+
+				<ul class="nav navbar-nav">
+					<li><a ui-sref="/">HOME</a></li>
+				</ul>
+
 			</div>
-		
-			<ul class="nav navbar-nav">
-				<li><a ui-sref="/">HOME</a></li>
-				<li><a ui-sref="home">Home</a></li>
-				<li><a ui-sref="about">About</a></li>
-			</ul>
 		</nav>
 
 		<div id="mainview">
 			<div ui-view></div>
 		</div>
+	
 	</body>
+
+
+
+
+
 </html>

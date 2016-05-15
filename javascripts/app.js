@@ -1,7 +1,7 @@
 /*global angular, $, console */
 /*jslint plusplus: true */
 
-var iplatr = angular.module('iplatr', ['ui.router', 'ngRoute', 'angularCSS']);
+var iplatr = angular.module('iplatr', ['ui.router', 'ngRoute', 'angularCSS', 'ngAnimate', 'ui.bootstrap']);
 
 iplatr.run(function ($rootScope) {
 	'use strict';
@@ -134,15 +134,23 @@ iplatr.controller(
 		} //end function CookPartialMenusController
 	]
 );
+//Cook Partial Menus List Controller
 iplatr.controller(
 	'CookPartialMenusListController',
 	[
-		'$log', '$http', '$scope', 'PersonFactory', 'MenusFactory',
-		function ($log, $http, $scope, PersonFactory, MenusFactory) {
+		'$log', '$http', '$scope', 'PersonFactory', 'MenusFactory', 'PlatterFactory',
+		function ($log, $http, $scope, PersonFactory, MenusFactory, PlatterFactory) {
 			'use strict';
 
-			$scope.Menus = [];
+			$scope.Menus = [];			//Used for holding the menu titles.
+			$scope.Platters = [];		//Used for holding a menu's platters.
+			$scope.oneAtATime = true;	//Used for managing the collapsable list.
+			$scope.status = {
+				isFirstOpen: true,
+				isFirstDisabled: false
+			};
 
+			//Get the menu titles then populates the $scope.Menus array.
 			$scope.getMenuTitles = function (personId) {
 				MenusFactory.getMenuTitles({ personId: personId})
 					.success(
@@ -158,6 +166,31 @@ iplatr.controller(
 						}
 					);
 			}; //$scope.getMenuTitles
+
+			//For each menu in the Menus array, get the associated platter.
+			$scope.getPlatter = function (menu) {
+				$scope.Platters.length = 0;
+
+				this.menuArgs = {
+					menuId : menu.menuId,
+					personId : PersonFactory.Person.personId
+				};
+				
+				//Get a platter based on a menuId
+				PlatterFactory.getPlatter(this.menuArgs)
+					.success(
+						function (response) {
+							$scope.status = response.status;
+							$scope.message = response.message;
+							$scope.Platters = response.data;
+						}
+					)
+					.error(
+						function (err) {
+							$log.log('Error occured: ' + err.message);
+						}
+					);
+			}; //getPlatter
 
 			$scope.getMenuTitles(PersonFactory.Person.personId);
 		} //end function CookPartialMenusListController
@@ -358,6 +391,27 @@ iplatr.controller('IndexController', ['$log', '$http', '$scope', '$location', 'P
 
 }]);
 
+iplatr
+	.factory(
+		'PlatterFactory',
+		[
+			'$http', '$log',
+			function ($http, $log) {
+				'use strict';
+
+				var urlPlatterBase = 'http://localhost/iplatr/database/',
+					getPlatter = 'getPlatter.php',
+					Platter = {};
+
+				//menu object needed for menuId property
+				Platter.getPlatter = function (menu) {
+					return $http.post(urlPlatterBase + getPlatter, menu);
+				};
+
+				return Platter;
+			}
+		]
+	);
 
 iplatr
 	.factory(

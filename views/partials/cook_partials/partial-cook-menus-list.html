@@ -1,12 +1,15 @@
 <div class="form" ng-controller="CookPartialMenusListController">
 	<p>List of Menus</p>
 
-	<ul class="menus">
-		<li ng-repeat="menu in Menus">
-			<p>{{ menu.menuId }} -- <a sref="{{ menu.menuId }}">{{ menu.title }}</a></p>
-		</li>
-	</ul>
+	<uib-accordion close-others="oneAtATime">
 
-	<br />
+		<uib-accordion-group heading="{{ menu.title }}" ng-repeat="menu in Menus" ng-click="getPlatter(menu)">
 
+			<ul>
+				<li ng-repeat="platter in Platters">{{platter.name}} ${{platter.price}}</li>
+			</ul>
+
+		</uib-accordion-group>
+
+	</uib-accordion>
 </div><!-- form -->
