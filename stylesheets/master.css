@@ -179,4 +179,12 @@ textarea {
 .nav, .pagination, .carousel, .panel-title a {
   cursor: pointer; }
 
+.indexNavigation {
+  height: 30px;
+  display: inline;
+  padding-right: 20px; }
+
+#foodType {
+  color: #000000; }
+
 /*# sourceMappingURL=master.css.map */

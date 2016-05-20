@@ -6,10 +6,18 @@
 		<uib-accordion-group heading="{{ menu.title }}" ng-repeat="menu in Menus" ng-click="getPlatter(menu)">
 
 			<ul>
-				<li ng-repeat="platter in Platters">{{platter.name}} ${{platter.price}}</li>
+				<li ng-repeat="platter in Platters">
+					<div>
+						<a sref="partial-cook-menus-platter-foodList">{{platter.name}}</a> ${{platter.price}}
+					</div>
+					<div>
+						<div ui-view="partial-cook-menus-platter-foodList"></div>
+					</div>
+				</li>
 			</ul>
 
 		</uib-accordion-group>
 
 	</uib-accordion>
+
 </div><!-- form -->

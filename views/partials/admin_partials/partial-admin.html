@@ -1,0 +1,117 @@
+<div class="form">
+
+
+
+	<ul class="tab-group">
+		<li class="tab active"><a href="#food">Food</a></li>
+		<li class="tab"><a href="#signup">Sign Up</a></li>
+	</ul>
+
+
+
+	<div class="tab-content">
+
+		<div id="login">
+
+			<h1>Administration</h1>
+
+			<form novalidate ng-submit="addFoodItem(food)">
+
+				<div class="field-wrap">
+					<input id="foodName" name="foodName" type="text" 
+						required placeholder="Name"
+						ng-model="food.name"
+						ng-change="foodNameChanged()"
+					/> 
+				</div>
+		
+				<div class="field-wrap">
+					<select 
+						id="foodType" 
+						name="foodType" 
+						ng-model="food.type" 
+						ng-options="item.type as item.type for item in foodItems"
+						ng-change="foodTypeChanged()"
+					>
+					</select>
+				</div>
+		
+				<div class="field-wrap">
+					<textarea 
+						id="description"
+						name="description"
+						required placeholder="Description"
+						rows="4" cols="50"
+						
+						ng-model="food.description"
+						ng-change="desciprtionChanged()"
+					></textarea>
+				</div>
+				
+				<input type="submit" class="btn btn-primary" value="Add" />
+
+			</form>
+
+			<div>
+				Status: {{ status }}<br />
+				Message: {{ message }}
+			</div>
+
+			<div>
+				Food Name:&nbsp;{{ food.name }}<br />
+				Food Type:&nbsp;{{ food.type }}<br />
+				Description:&nbsp;{{ food.description }}<br />
+			</div>
+
+		</div>
+
+
+
+		<div id="signup">   
+			<h1>Sign Up for Free</h1>
+
+			<form ng-submit="register(person)">
+
+				<div class="top-row">
+					<div class="field-wrap">
+						<label>First Name<span class="req">*</span></label>
+						<input type="text" ng-model="person.firstName" required autocomplete="off" />
+					</div>
+
+					<div class="field-wrap">
+						<label>Last Name<span class="req">*</span></label>
+						<input type="text" ng-model="person.lastName" required autocomplete="off"/>
+					</div>
+				</div>
+
+				<div class="field-wrap">
+					<label>Email Address<span class="req">*</span></label>
+					<input type="email" ng-model="person.email" required autocomplete="off"/>
+				</div>
+
+				<div class="field-wrap">
+					<label>Set A Password<span class="req">*</span></label>
+					<input type="password" ng-model="person.password" required autocomplete="off"/>
+				</div>
+
+				<div class="field-wrap">
+					<label for="accountType">Account Type:</label><br><br>
+
+					<select id="accountType" name="accountType" ng-model="person.accountType">
+						<option value="Cook">Cook</option>
+						<option value="foodie">Foodie</option>
+					</select>
+				</div>
+
+				<!--<button type="submit" class="button button-block"/>Get Started</button>-->
+				<input type="submit" class="button button-block-rounded-a-bit" value="Register" />
+
+			</form>
+
+		</div> <!-- div id="signup" -->
+
+
+
+	</div><!-- tab-content -->
+
+</div> <!-- /form -->

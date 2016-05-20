@@ -17,7 +17,6 @@ iplatr.config([
 		'use strict';
 
 		$locationProvider.html5Mode({enabled: true, requireBase: false});
-		$urlRouterProvider.otherwise("views/partials/partial-index.html");
 
 		$stateProvider
 			.state('index', {
@@ -40,6 +39,15 @@ iplatr.config([
 				templateUrl: 'views/partials/partial-index.html',
 				controller: 'IndexController',
 				css: 'stylesheets/master.css'
+			})
+
+
+
+			//ADMIN STATE ========================================================
+			.state('admin', {
+				url: '/admin',
+				templateUrl: 'views/partials/admin_partials/partial-admin.html',
+				controller: 'AdminController'
 			})
 
 
@@ -68,16 +76,90 @@ iplatr.config([
 					'partial-cook-menus-list@cook': {
 						templateUrl: 'views/partials/cook_partials/partial-cook-menus-list.html',
 						controller: 'CookPartialMenusListController'
+					},
+					'partial-cook-menus-platter-foodList': {
+						templateUrl: 'views/partials/cook_partials/partial-cook-menus-platter-foodList.html',
+						controller: 'partial-cook-menus-platter-foodList'
 					}
 				}
-			});
+			}); //end state provider
+
+
+		$urlRouterProvider.otherwise("views/partials/partial-index.html");
 	}
 	
 ]);
 
 
 
+//Administration Controller
+iplatr.controller(
+	'AdminController',
+	[
+		'$log', '$http', '$scope', 'FoodFactory', 'PersonFactory',
+		function ($log, $http, $scope, FoodFactory, PersonFactory) {
+			'use strict';
 
+			$scope.foodItems = [];
+
+
+
+			$scope.init = function () {
+				FoodFactory.getFoodTypes()
+					.success(function (response) {
+						$scope.status = response.status;
+						$scope.message = response.message;
+						$scope.foodItems = response.data;
+					})
+					.error(function (err) {
+						$scope.status = err.status;
+						$scope.message = err.message;
+					});
+			}; //init
+
+			
+
+			$scope.addFoodItem = function (food) {
+				debugger;
+
+				this.args = {
+					personId: PersonFactory.Person.personId,
+					name: food.name,
+					type: food.type,
+					description: food.description
+				};
+
+				//Add a new food item to the db
+				FoodFactory.addFoodItem(this.args)
+					.success(function (response) {
+						$scope.status = response.status;
+						$scope.message = response.message;
+
+					})
+					.error(function (err) {
+						$scope.status = err.status;
+						$scope.message = err.message;
+					});
+			}; 
+
+			
+
+			$scope.foodNameChanged = function () {
+				$scope.foodName = $scope.food.name;
+			};
+
+			$scope.foodTypeChanged = function () {
+				$scope.foodType = $scope.food.type;
+			};
+
+			$scope.desciprtionChanged = function () {
+				$scope.description = $scope.food.description;
+			};
+
+			$scope.init();
+		}
+	]
+);
 //Cook Partial Header
 iplatr.controller(
 	'CookPartialHeaderController',
@@ -235,7 +317,7 @@ iplatr.controller(
 
 
 
-
+//CookController
 iplatr.controller('CookController', ['$log', '$http', '$scope', 'PersonFactory', function ($log, $http, $scope, PersonFactory) {
 	'use strict';
 	
@@ -301,8 +383,8 @@ iplatr.controller('CookController', ['$log', '$http', '$scope', 'PersonFactory',
 	}; //init
 	
 	//this.init();
-	
 }]);
+//IndexController
 iplatr.controller('IndexController', ['$log', '$http', '$scope', '$location', 'PersonFactory', '$state', function ($log, $http, $scope, $location, PersonFactory, $state) {
 	'use strict';
 	
@@ -388,9 +470,12 @@ iplatr.controller('IndexController', ['$log', '$http', '$scope', '$location', 'P
 			});
 	  
 	}; //$scope.login
-
 }]);
 
+
+
+
+//PlatterFactory
 iplatr
 	.factory(
 		'PlatterFactory',
@@ -412,7 +497,36 @@ iplatr
 			}
 		]
 	);
+//FoodFactory
+iplatr
+	.factory(
+		'FoodFactory',
+		[
+			'$http', '$log',
+			function ($http, $log) {
+				'use strict';
 
+				var urlFoodBase = 'http://localhost/iplatr/database/',
+					addNewFoodItem = 'addNewFoodItem.php',
+					getFoodItem = 'getFoodItem.php',
+					getFoodTypes = 'getFoodTypes.php',
+					Food = {};
+
+				Food.addFoodItem = function (food) {
+					return $http.post(urlFoodBase + addNewFoodItem, food);
+				};
+				Food.getFoodItem = function (food) {
+					return $http.post(urlFoodBase + getFoodItem, food);
+				};
+				Food.getFoodTypes = function () {
+					return $http.post(urlFoodBase + getFoodTypes);
+				};
+
+				return Food;
+			}
+		]
+	); //FoodFactory
+//MenusFactory
 iplatr
 	.factory(
 		'MenusFactory',
@@ -442,9 +556,8 @@ iplatr
 
 			} //end function
 		]
-	);
-
-
+	); //MenusFactory
+//PersonFactory
 iplatr
 	.factory(
 		'PersonFactory',
@@ -484,4 +597,4 @@ iplatr
 				return Person;
 			}
 		]
-	);
+	); //PersonFactory
