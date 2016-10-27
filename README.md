@@ -1,2 +1,2 @@
 # iplatr
-i am learning software
+Matching system for two binary parties with database and front end included.
